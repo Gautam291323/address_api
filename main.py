@@ -50,3 +50,10 @@ def nearby(lat: float, lon: float, distance: float, db: Session = Depends(get_db
             result.append(i)
 
     return result
+
+@app.put("/address/{id}")
+def update(id: int, address: schemas.AddressUpdate, db: Session = Depends(get_db)):
+    res = crud.update_address(db, id, address)
+    if not res:
+        raise HTTPException(status_code=404, detail="Not found")
+    return res
