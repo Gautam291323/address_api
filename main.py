@@ -2,7 +2,6 @@ from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 import models, schemas, crud
 from database import engine, SessionLocal
-import math
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -40,4 +39,4 @@ def update(id: int, address: schemas.AddressUpdate, db: Session = Depends(get_db
     res = crud.update_address(db, id, address)
     if not res:
         raise HTTPException(status_code=404, detail="Not found")
-    return res
+    return {"message": "Updated successfully"}
