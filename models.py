@@ -8,5 +8,3 @@ class Address(Base):
     name = Column(String)
     phone = Column(String)
     address = Column(String)
-    latitude = Column(Float)
-    longitude = Column(Float)
