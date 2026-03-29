@@ -33,7 +33,7 @@ def delete(id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Not found")
     return {"message": "Deleted"}
 
-
+#update
 @app.put("/address/{id}")
 def update(id: int, address: schemas.AddressUpdate, db: Session = Depends(get_db)):
     res = crud.update_address(db, id, address)
