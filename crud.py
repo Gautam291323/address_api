@@ -18,11 +18,18 @@ def delete_address(db: Session, id: int):
         db.commit()
     return obj
 
-def update_address(db: Session, id: int, address_update):
+def update_address(db, id, address):
     obj = db.query(models.Address).filter(models.Address.id == id).first()
-    if obj:
-        for key, value in address_update.dict(exclude_unset=True).items():
-            setattr(obj, key, value)
-        db.commit()
-        db.refresh(obj)
+    if not obj:
+        return None
+
+    if address.name is not None:
+        obj.name = address.name
+    if address.phone is not None:
+        obj.phone = address.phone
+    if address.address is not None:
+        obj.address = address.address
+
+    db.commit()
+    db.refresh(obj)
     return obj
